@@ -16,10 +16,6 @@
     <script>
         let url = "https://web-hit-counter.azurewebsites.net/api/sites/1234";
         let counter = document.getElementById("counter");
-        fetch(url)
-            .then(res => res.json())
-            .then(res => { counter.innerText = res.hitCount; });
-
         import('https://openfpcdn.io/fingerprintjs/v3')
             .then(FingerprintJS => FingerprintJS.load())
             .then(fp => fp.get())
@@ -33,7 +29,12 @@
                         fingerprint: res.visitorId,
                     }),
                 };
-                fetch(url, options);
+                fetch(url, options)
+                    .then(res => {
+                        fetch(url)
+                            .then(res => res.json())
+                            .then(res => { counter.innerText = res.hitCount; });
+                    });
             });
     </script>
 </body>
