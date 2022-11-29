@@ -26,11 +26,7 @@ public class Api
             EnableContentResponseOnWrite = false,
         };
 
-#if DEBUG
-        var cosmosClient = new CosmosClient(config.GetConnectionString("Cosmos"), cosmosClientOptions);
-#else
-        var cosmosClient = new CosmosClient(config["CosmosUrl"], new DefaultAzureCredential(false), cosmosClientOptions);
-#endif
+        var cosmosClient = new CosmosClient(config["CosmosConnectionString"], cosmosClientOptions);
 
         hitContainer = cosmosClient.GetContainer(config["DatabaseId"], config["HitContainerId"]);
         siteContainer = cosmosClient.GetContainer(config["DatabaseId"], config["SiteContainerId"]);
