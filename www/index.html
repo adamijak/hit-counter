@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HitCounterDemo</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <main>
         <h1>Welcome to My Website</h1>
-		<h2>Hit count: <span id="counter"></span></h2>
+        <h2>Hit count: <span id="counter"></span></h2>
     </main>
-	<script>
-    	var counter = document.getElementById("counter");
-		fetch("https://web-hit-counter.azurewebsites.net/api/sites/1234")
-			.then(res => res.json())
-			.then(res => {
-				counter.innerText = res.hitCount;
-			});
-  	</script>
-  </body>
+    <script>
+        let url = "https://web-hit-counter.azurewebsites.net/api/sites/1234";
+        let counter = document.getElementById("counter");
+        fetch(url)
+            .then(res => res.json())
+            .then(res => { counter.innerText = res.hitCount; });
+
+        import('https://openfpcdn.io/fingerprintjs/v3')
+            .then(FingerprintJS => FingerprintJS.load())
+            .then(fp => fp.get())
+            .then(res => {
+                let options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify({
+                        fingerprint: res.visitorId,
+                    }),
+                };
+                fetch(url, options);
+            });
+    </script>
+</body>
+
 </html>
