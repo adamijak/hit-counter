@@ -29,13 +29,11 @@
                         fingerprint: res.visitorId,
                     }),
                 };
-                fetch(url, options)
-                    .then(res => {
-                        fetch(url)
-                            .then(res => res.json())
-                            .then(res => { counter.innerText = res.hitCount; });
-                    });
-            });
+                return fetch(url, options);
+            })
+            .then(res => fetch(url))
+            .then(res => res.json())
+            .then(res => { counter.innerText = res.hitCount; });
     </script>
 </body>
 
