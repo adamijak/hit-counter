@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"name": "api",
+			"path": "../api"
+		},
+		{
+			"name": "www",
+			"path": "../www"
+		},
+		{
+			"name": "solution",
+			"path": "."
+		}
+	],
+	"settings": {
+		"debug.internalConsoleOptions": "neverOpen",
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
+			"bin": true,
+			"obj": true,
+		}
+	}
+}
